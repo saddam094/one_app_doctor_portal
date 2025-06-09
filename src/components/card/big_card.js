@@ -1,4 +1,3 @@
-import React from 'react'
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const big_card = ({ title, subTitle, counts }) => {

@@ -2,31 +2,31 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, Link, useLocation } from "react-router-dom";
 import Header from "./components/header/header.js";
 import Dashboard from "./pages/navbar_screens/dashboard/dashboard.js";
-import Ecommerce from "./pages/navbar_screens/e_commerce/e_commerce.js";
-import Eproducts from "./pages/navbar_screens/e_products/e_products.js";
-import Services from "./pages/navbar_screens/services/services.js";
-import Doctor from "./pages/navbar_screens/doctor/doctor.js";
-import P5 from "./pages/navbar_screens/p5/p5.js";
-import Cab from "./pages/navbar_screens/cab/cab.js";
-import Leisure from "./pages/navbar_screens/leisure/leisure.js";
-import RealState from "./pages/navbar_screens/real_state/real_state.js";
+import Patients from "./pages/navbar_screens/patients/Patient.js";
+// import Eproducts from "./pages/navbar_screens/e_products/e_products.js";
+// import Services from "./pages/navbar_screens/services/services.js";
+// import Doctor from "./pages/navbar_screens/doctor/doctor.js";
+// import P5 from "./pages/navbar_screens/p5/p5.js";
+// import Cab from "./pages/navbar_screens/cab/cab.js";
+// import Leisure from "./pages/navbar_screens/leisure/leisure.js";
+// import RealState from "./pages/navbar_screens/real_state/real_state.js";
 import AdminLogin from "./admin_login.js";
 
 /// update page
-import EcomUpdate from "./pages/updates/ecom_update/ecom_update.js";
-import EcomUpdateProduct from "./pages/updates/ecom_product_update/ecom_product_update.js";
-import ServiceManUpdate from "./pages/updates/service_update/service_update.js";
-import DoctorUpdate from "./pages/updates/doctor_update/doctor_update.js";
+// import EcomUpdate from "./pages/updates/ecom_update/ecom_update.js";
+// import EcomUpdateProduct from "./pages/updates/ecom_product_update/ecom_product_update.js";
+// import ServiceManUpdate from "./pages/updates/service_update/service_update.js";
+// import DoctorUpdate from "./pages/updates/doctor_update/doctor_update.js";
 
 /// add Page
-import EcomAddMember from "./pages/add/ecom_add_shop/ecom_add_shop.js";
-import EcomAddProduct from "./pages/add/ecom_add_product/ecom_add_product.js";
-import AddServiceMan from "./pages/add/add_service_man/add_service_man.js";
-import AddDoctor from "./pages/add/add_doctor/add_doctor.js";
+// import EcomAddMember from "./pages/add/ecom_add_shop/ecom_add_shop.js";
+// import EcomAddProduct from "./pages/add/ecom_add_product/ecom_add_product.js";
+// import AddServiceMan from "./pages/add/add_service_man/add_service_man.js";
+// import AddDoctor from "./pages/add/add_doctor/add_doctor.js";
 
 /// manage Category
-import ManageServicesCategory from "./pages/manage_category/services_category/manage_services_category.js";
-import ManageDoctorsCategory from "./pages/manage_category/doctors_category/manage_doctors_category.js";
+// import ManageServicesCategory from "./pages/manage_category/services_category/manage_services_category.js";
+// import ManageDoctorsCategory from "./pages/manage_category/doctors_category/manage_doctors_category.js";
 
 
 
@@ -97,18 +97,11 @@ function App() {
       {isAuthenticated && <Header setIsAuthenticated={setIsAuthenticated} />}
 
       {isAuthenticated && (
-        <div className="flex h-16 items-center px-10 border-b-2 bg-slate-100 border-slate-300 justify-between">
+        <div className="flex h-40 items-center px-10 border-b-2 bg-white border-slate-300 justify-between pt-20">
           <nav>
             <ul className="flex space-x-10">
               <NavLink to="/">Dashboard</NavLink>
-              <NavLink to="/e-commerce">E-Commerce</NavLink>
-              <NavLink to="/e-products">E-Products</NavLink>
-              <NavLink to="/services">Services</NavLink>
-              <NavLink to="/doctor">Doctor</NavLink>
-              <NavLink to="/p5">P5</NavLink>
-              {/* <NavLink >Travel</NavLink>
-              <NavLink >Leisure</NavLink>
-              <NavLink >Real State</NavLink> */}
+              <NavLink to="/patients">Patients</NavLink>
             </ul>
           </nav>
         </div>
@@ -123,8 +116,8 @@ function App() {
         {isAuthenticated ? (
           <>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/e-commerce" element={<Ecommerce />} />
-            <Route path="/e-products" element={<Eproducts />} />
+            <Route path="/patients" element={<Patients />} />
+            {/* <Route path="/e-products" element={<Eproducts />} />
             <Route path="/services" element={<Services />} />
             <Route path="/doctor" element={<Doctor />} />
             <Route path="/cab" element={<Cab />} />
@@ -140,7 +133,7 @@ function App() {
             <Route path="/add_doctor" element={<AddDoctor />} />
             <Route path="/p5" element={<P5 />} />
             <Route path="/manage_service_category" element={<ManageServicesCategory />} />
-            <Route path="/manage_doctor_category" element={<ManageDoctorsCategory />} />
+            <Route path="/manage_doctor_category" element={<ManageDoctorsCategory />} /> */}
           </>
         ) : (
           <Route path="*" element={<Navigate to="/admin_login" replace />} />

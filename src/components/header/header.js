@@ -20,7 +20,7 @@ function Header({ setIsAuthenticated }) {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("adminEmail");
+    localStorage.removeItem("doctorEmail");
     localStorage.removeItem("isAuthenticated");
 
     setIsAuthenticated(false);
@@ -56,7 +56,7 @@ function Header({ setIsAuthenticated }) {
   }, [fetchProfile]); // No warning now!
 
   return (
-    <div className="flex h-20 w-full bg-slate-100 border-slate-300 border-b-2 items-center justify-between px-10">
+    <div className="flex h-20 w-full bg-white border-slate-300 border-b-2 items-center justify-between px-10 fixed">
       {/* Logo */}
       <Link to={'/'}>
         <img src={logo} alt="logo" className="w-14 h-14 rounded-sm" />
@@ -85,7 +85,7 @@ function Header({ setIsAuthenticated }) {
         <div className="flex items-center space-x-3">
           <img src={person} alt="Admin" className="w-10 h-10 rounded-full object-cover" />
           <div>
-            <p className="text-gray-700 font-medium">{profileData?.name || 'Admin'}</p>
+            <p className="text-gray-700 font-medium">{profileData?.name || 'Doctor Portal'}</p>
             <button onClick={handleLogout} className="text-red-500 text-sm font-medium hover:underline">
               Logout
             </button>
