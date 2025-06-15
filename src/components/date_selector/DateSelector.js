@@ -3,7 +3,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const DateSelector = () => {
   const [dates, setDates] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date().toDateString());
+
+  const today = new Date();
+  const formattedDate = today.toISOString().split('T')[0];
+
+  const [selectedDate, setSelectedDate] = useState(formattedDate);
   const scrollRef = useRef(null);
 
   useEffect(() => {

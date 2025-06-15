@@ -3,25 +3,32 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const AdminLogin = ({ setIsAuthenticated }) => {
+const DoctorLogin = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
   const notify = (message) => toast(message);
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [doctorId, setDoctorId] = useState("");
   const [loading, setLoading] = useState(false); // State to track loading
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); // Start loading
 
-    const data = { email, password };
+    const data = { 
+      email: email,
+      doctor_id: doctorId 
+    };
+
+    console.log('Data', data)
 
     try {
       const response = await axios.post(
-        "https://r2fjv162gj.execute-api.ap-south-1.amazonaws.com/prod/oneapp_admin_login",
+        "https://r2fjv162gj.execute-api.ap-south-1.amazonaws.com/prod/login_doctor_portal",
         data
       );
+
+      console.log('Login Api Response',response.data["body-json"])
 
       if (response.data["body-json"].statusCode === 200) {
         notify("Login Successfully");
@@ -32,6 +39,7 @@ const AdminLogin = ({ setIsAuthenticated }) => {
         const token = response.data["body-json"].body.token;
         localStorage.setItem("token", token);
         localStorage.setItem("doctorEmail", email);
+        localStorage.setItem("doctorId", doctorId);
 
         navigate("/");
       } else {
@@ -61,13 +69,13 @@ const AdminLogin = ({ setIsAuthenticated }) => {
             />
           </div>
           <div className="relative">
-            <label className="block text-white text-sm font-semibold mb-1">Password</label>
+            <label className="block text-white text-sm font-semibold mb-1">Doctor Id</label>
             <input
-              type="password"
+              type="text"
               className="w-full px-4 py-2 bg-transparent border border-white/40 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/60 placeholder-white/70 transition-all"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your Doctor Id"
+              value={doctorId}
+              onChange={(e) => setDoctorId(e.target.value)}
               required
             />
           </div>
@@ -88,4 +96,4 @@ const AdminLogin = ({ setIsAuthenticated }) => {
   );
 };
 
-export default AdminLogin;
+export default DoctorLogin;

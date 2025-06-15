@@ -7,35 +7,26 @@ import DashboardTable from '../../../components/table/dashboard_table';
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState({
-    totalRegistrations: 0,
-    totalRevenue: 0,
-    totalUsers: 0,
-    totalDoctors: 0,
-    totalLeisure: 0,
-    totalServiceMan: 0,
-    totalCabDrivers: 0,
-    totalEcomStores: 0,
-    totalRealEstateAgents: 0
+    totalAppointments: 0,
+    cancelAppointments: 0,
+    completedAppointments: 0,
+    timeList: []
   });
 
   useEffect(() => {
     const fetchData = async () => {
+
       try {
-        const response = await axios.get('https://r2fjv162gj.execute-api.ap-south-1.amazonaws.com/prod/one_app_admin_dashboard_table_items_count');
-        const data = response.data['body-json']['body']; // Assuming API returns an object with relevant fields
-        // console.log(data);
+
+        const response = await axios.post('https://r2fjv162gj.execute-api.ap-south-1.amazonaws.com/prod/particular_doctor_dashboard_details',{doctor_id: "DOC-352152"} );
+        const data = response.data['body-json']['body'];
 
 
         setDashboardData({
-          totalRegistrations: data['totalRegistration'] || 0,
-          totalRevenue: data['totalRevenue'] || '00.00',
-          totalUsers: data['totalUser'] || 0,
-          totalDoctors: data['totalDoctor'] || 0,
-          totalLeisure: data['totalLeisure'] || 0,
-          totalServiceMan: data['totalServiceMan'] || 0,
-          totalCabDrivers: data['totalCabDriver'] || 0,
-          totalEcomStores: data['totalEcomStore'] || 0,
-          totalRealEstateAgents: data['totalRealStateAgent'] || 0
+          totalAppointments: data['totalAppointments'] || 0,
+          cancelAppointments: data['cancelAppointments'] || 0,
+          completedAppointments: data['completedAppointments'] || 0,
+          timeList: data['timeList'] || [],
         });
 
       } catch (error) {
@@ -55,9 +46,9 @@ const Dashboard = () => {
           <div className='flex flex-col space-y-6'>
             {/* Big Cards */}
             <div className='flex space-x-6'>
-              <BigCard title={'Appointments'} subTitle={'Number Of Appointments'} counts={dashboardData.totalRegistrations} />
-              <BigCard title={'Patients'} subTitle={'Number Of Patients'} counts={dashboardData.totalRevenue} />
-              <BigCard title={'Cancelled'} subTitle={'Number Of Cancelled'} counts={dashboardData.totalUsers} />
+              <BigCard title={'Total Appointments'} subTitle={'Number Of Appointments'} counts={dashboardData.totalAppointments} />
+              <BigCard title={'Cancel Appointments'} subTitle={'Number Of Patients'} counts={dashboardData.cancelAppointments} />
+              <BigCard title={'Completed Appointments'} subTitle={'Number Of Appointments Cancelled'} counts={dashboardData.completedAppointments} />
             </div>
 
             {/* Calender */}
@@ -67,7 +58,7 @@ const Dashboard = () => {
 
           {/* Upload Schedule */}
           <div className="w-96 space-y-3 bg-white rounded-2xl">
-            <UploadSchedule />
+            <UploadSchedule timeList={dashboardData.timeList}/>
           </div>
         </div>
 

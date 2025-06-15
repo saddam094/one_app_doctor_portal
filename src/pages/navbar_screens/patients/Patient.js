@@ -5,36 +5,30 @@ import PatientsTable from '../../../components/table/PatientsTable'
 
 const Patients = () => {
 
-  const [dashboardData, setDashboardData] = useState({
-    totalRegistrations: 0,
-    totalRevenue: 0,
-    totalUsers: 0,
-    totalDoctors: 0,
-    totalLeisure: 0,
-    totalServiceMan: 0,
-    totalCabDrivers: 0,
-    totalEcomStores: 0,
-    totalRealEstateAgents: 0
+  const [selectedDate, setSelectedDate] = useState('All');
+
+  const [PatientData, setPatientData] = useState({
+    totalAppointments: 0,
+    completedAppointments: 0,
+    pendingAppointments: 0,
+    cancelAppointments: 0
   });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://r2fjv162gj.execute-api.ap-south-1.amazonaws.com/prod/one_app_admin_dashboard_table_items_count');
-        const data = response.data['body-json']['body']; // Assuming API returns an object with relevant fields
-        // console.log(data);
+
+        const doctor_id = localStorage.getItem('doctorId');
+
+        const response = await axios.post('https://r2fjv162gj.execute-api.ap-south-1.amazonaws.com/prod/till_today_patients_counts', { doctor_id: doctor_id });
+        const data = response.data['body-json']['body'];
 
 
-        setDashboardData({
-          totalRegistrations: data['totalRegistration'] || 0,
-          totalRevenue: data['totalRevenue'] || 0,
-          totalUsers: data['totalUser'] || 0,
-          totalDoctors: data['totalDoctor'] || 0,
-          totalLeisure: data['totalLeisure'] || 0,
-          totalServiceMan: data['totalServiceMan'] || 0,
-          totalCabDrivers: data['totalCabDriver'] || 0,
-          totalEcomStores: data['totalEcomStore'] || 0,
-          totalRealEstateAgents: data['totalRealStateAgent'] || 0
+        setPatientData({
+          totalAppointments: data['totalAppointments'] || 0,
+          completedAppointments: data['completedAppointments'] || 0,
+          pendingAppointments: data['pendingAppointments'] || 0,
+          cancelAppointments: data['cancelAppointments'] || 0,
         });
 
       } catch (error) {
@@ -45,19 +39,36 @@ const Patients = () => {
     fetchData();
   }, []);
 
+
+  const handleChange = (e) => {
+    setSelectedDate(e.target.value);
+    console.log(selectedDate);
+  };
+
   return (
     <>
       <div className='px-6 bg-white mb-5'>
         {/* Cards */}
         <div className='flex space-x-6 justify-between mb-5 mt-5'>
-              <BigCard title={'All Patients'} subTitle={'Number Of All Patients'} counts={dashboardData.totalRegistrations} />
-              <BigCard title={'Confirmed Patients'} subTitle={'Number Of Confirmed Patients'} counts={dashboardData.totalRevenue} />
-              <BigCard title={'Pending Patients'} subTitle={'Number Of Pending Patients'} counts={dashboardData.totalUsers} />
-              <BigCard title={'Cancelled Patients'} subTitle={'Number Of Cancelled Patients'} counts={dashboardData.totalUsers} />
-            </div>
+          <BigCard title={'Total Appointment'} subTitle={'Number Of All Appointment'} counts={PatientData.totalAppointments} />
+          <BigCard title={'Confirmed Patients'} subTitle={'Number Of Completed Appointment'} counts={PatientData.completedAppointments} />
+          <BigCard title={'Pending Patients'} subTitle={'Number Of Pending Appointment'} counts={PatientData.pendingAppointments} />
+          <BigCard title={'Cancelled Patients'} subTitle={'Number Of Cancelled Appointment'} counts={PatientData.cancelAppointments} />
+
+          <div className="flex flex-col justify-between h-32 bg-indigo-50 rounded-xl p-4">
+            <h2 className="text-md font-serif text-slate-700">Select a Date</h2>
+
+            <input
+              type="date"
+              value={selectedDate}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+          </div>
+        </div>
 
         {/* Patient Table */}
-        <PatientsTable />
+        <PatientsTable selectedDate={selectedDate} />
       </div>
     </>
   )

@@ -10,7 +10,7 @@ import Patients from "./pages/navbar_screens/patients/Patient.js";
 // import Cab from "./pages/navbar_screens/cab/cab.js";
 // import Leisure from "./pages/navbar_screens/leisure/leisure.js";
 // import RealState from "./pages/navbar_screens/real_state/real_state.js";
-import AdminLogin from "./admin_login.js";
+import DoctorLogin from "./doctor_login.js";
 
 /// update page
 // import EcomUpdate from "./pages/updates/ecom_update/ecom_update.js";
@@ -109,8 +109,8 @@ function App() {
 
       <Routes>
         <Route
-          path="/admin_login"
-          element={isAuthenticated ? <Navigate to="/" replace /> : <AdminLogin setIsAuthenticated={setIsAuthenticated} />}
+          path="/doctor_login"
+          element={isAuthenticated ? <Navigate to="/" replace /> : <DoctorLogin setIsAuthenticated={setIsAuthenticated} />}
         />
 
         {isAuthenticated ? (
@@ -136,7 +136,7 @@ function App() {
             <Route path="/manage_doctor_category" element={<ManageDoctorsCategory />} /> */}
           </>
         ) : (
-          <Route path="*" element={<Navigate to="/admin_login" replace />} />
+          <Route path="*" element={<Navigate to="/doctor_login" replace />} />
         )}
       </Routes>
     </Router>
