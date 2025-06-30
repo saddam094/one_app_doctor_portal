@@ -8,17 +8,7 @@ const PatientsTable = ({ selectedDate }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // const notify = (message) => toast.success(message);
   const notifyError = (message) => toast.error(message);
-
-
-
-
-  // useEffect(() => {
-  //   if(PatientTableData.length === 0){
-  //     fetchData();
-  //   }
-  // });
 
   useEffect(() => {
     // Fetch API data using Axios  
@@ -47,7 +37,7 @@ const PatientsTable = ({ selectedDate }) => {
     };
 
     if (selectedDate) {
-      setLoading(true);     // Reset loading state before fetching
+      setLoading(true);
       fetchData();
     }
   }, [selectedDate]);
@@ -62,16 +52,16 @@ const PatientsTable = ({ selectedDate }) => {
       <table className="min-w-full text-left border-collapse">
         <thead className="bg-indigo-50">
           <tr>
-            <th className="px-4 py-2 border text-center">Appointment ID</th>
-            <th className="px-4 py-2 border text-center">P Name</th>
-            <th className="px-4 py-2 border text-center">P Phone</th>
-            <th className="px-4 py-2 border text-center">P Email</th>
-            <th className="px-4 py-2 border text-center">Doctor</th>
-            <th className="px-4 py-2 border text-center">Treatment</th>
-            <th className="px-4 py-2 border text-center">Address</th>
-            <th className="px-4 py-2 border text-center">Date</th>
-            <th className="px-4 py-2 border text-center">Time</th>
-            <th className="px-4 py-2 border text-center">Status</th>
+            <th className="px-4 py-2 border text-center whitespace-nowrap">Appointment ID</th>
+            <th className="px-4 py-2 border text-center whitespace-nowrap">P Name</th>
+            <th className="px-4 py-2 border text-center whitespace-nowrap">P Phone</th>
+            <th className="px-4 py-2 border text-center whitespace-nowrap">P Email</th>
+            <th className="px-4 py-2 border text-center whitespace-nowrap">Doctor</th>
+            <th className="px-4 py-2 border text-center whitespace-nowrap">Treatment</th>
+            <th className="px-4 py-2 border text-center whitespace-nowrap">Address</th>
+            <th className="px-4 py-2 border text-center whitespace-nowrap">Date</th>
+            <th className="px-4 py-2 border text-center whitespace-nowrap">Time</th>
+            <th className="px-4 py-2 border text-center whitespace-nowrap">Status</th>
           </tr>
         </thead>
         <tbody>

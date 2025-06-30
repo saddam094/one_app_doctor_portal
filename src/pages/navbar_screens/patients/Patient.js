@@ -47,9 +47,9 @@ const Patients = () => {
 
   return (
     <>
-      <div className='px-6 bg-white mb-5'>
+      <div className='px-4 sm:px-6 md:px-10 py-6 bg-white pt-24 md:pt-6'>
         {/* Cards */}
-        <div className='flex space-x-6 justify-between mb-5 mt-5'>
+        <div className='flex-row md:flex  space-y-4 md:space-y-0 md:space-x-6 mb-5'>
           <BigCard title={'Total Appointment'} subTitle={'Number Of All Appointment'} counts={PatientData.totalAppointments} />
           <BigCard title={'Confirmed Patients'} subTitle={'Number Of Completed Appointment'} counts={PatientData.completedAppointments} />
           <BigCard title={'Pending Patients'} subTitle={'Number Of Pending Appointment'} counts={PatientData.pendingAppointments} />
