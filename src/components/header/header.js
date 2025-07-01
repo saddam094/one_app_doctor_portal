@@ -221,6 +221,13 @@ function Header({ setIsAuthenticated }) {
             >
               Patients
             </Link>
+            <Link
+              to="/register_patient"
+              className="block px-4 py-2 text-gray-700 rounded hover:bg-indigo-100"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Register Patient
+            </Link>
           </nav>
 
           <Link
