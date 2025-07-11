@@ -108,7 +108,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import logo from '../../assets/images/p5 logo.png';
+import logo from '../../assets/images/logo1.png';
 import person from '../../assets/images/person male.png';
 
 function Header({ setIsAuthenticated }) {
@@ -160,7 +160,7 @@ function Header({ setIsAuthenticated }) {
       <div className="flex items-center justify-between px-4 md:px-10 h-20">
         {/* Logo */}
         <Link to={'/'}>
-          <img src={logo} alt="logo" className="w-12 h-12 rounded-sm" />
+          <img src={logo} alt="logo" className="w-24 h-10 rounded-sm" />
         </Link>
 
         {/* Search Bar (hidden on small screens) */}
